@@ -1,0 +1,57 @@
+{% extends "base_generic.html" %}
+  <!-- Добавление дополнительного статического CSS файла -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-3">
+      <a class="button_link" href="{% url 'room' %}">
+        <div class="square" > 
+          <div class="text">Кабинеты</div>
+        </div> 
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a class="button_link" href="#">
+        <div class="square"> 
+          <div class="text">Комплек-<br>тующие</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a class="button_link" href="#">
+        <div class="square">
+          <div class="text">Склад</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3">
+      <a class="button_link" href="#">
+        <div class="square">
+          <div class="text">Софт</div>
+        </div>
+      </a>   
+    </div>
+    <div class="col-sm-3">
+      <a class="button_link" href="#">
+        <div class="square">
+          <div class="text">ЭЦП</div>
+        </div>
+      </a>    
+    </div>
+    <div class="col-sm-3">
+      <a class="button_link" href="{% url 'employee' %}">
+        <div class="square">
+          <div class="text">Сотрудники</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+{% endblock %}

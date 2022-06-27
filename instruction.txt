@@ -1,0 +1,15 @@
+Эта инструкция для разворачивания контейнера Docker и работы в консоли
+
+работа вне контейнера
+    активация папки с python
+        source env/bin/activate
+    миграция БД
+        (env)$ python3 manage.py makemigrations
+        (env)$ python3 manage.py migrate
+        (env)$ python3 manage.py runserver
+
+разворачивание контейнера
+    открыть консоль по адресу папки
+        docker-compose up -d --build
+    миграция БД
+        docker-compose exec web python manage.py migrate --noinput

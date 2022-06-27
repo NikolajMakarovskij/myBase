@@ -1,0 +1,46 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="col-sm-10"> 
+    <h1 style="text-align:center" >Список рабочих</h1>
+
+    {% if workplace_list %}
+    <table class="table_list">
+        <th class="table_head">Раб. место</th>
+        <th class="table_head">Кабинет</th>
+        <th class="table_head">Этаж</th>
+        <th class="table_head">Здание</th>
+      <!--<th class="table_head">Количество рабочих мест</th>
+      <th class="table_head">Количество сотрудников</th> -->
+
+    {% for Workplace in workplace_list %}
+    <tbody>
+    <tr>
+    <td class="table_column_list">
+        {{ Workplace.name }} </a>
+    </td>
+    <td class="table_column_list">
+        {{ Workplace.Room.name }} </a>
+    </td>
+    <td class="table_column_list">
+        {{ Workplace.Room.Floor.name }} </a>
+    </td>
+    <td class="table_column_list">
+        {{ Workplace.Room.Floor.Building.name }}</a>
+    </td>
+    <!--<td>
+      {{ num_workplaceys.Room }}</a>
+    </td> 
+    <td>
+      {{ Room.num_employeyes }}</a>
+    </td>     -->
+    {% endfor %}
+    </tr>
+    </tbody>
+    </table>
+
+    {% else %}
+      <p>Нет зданий.</p>
+    {% endif %}
+  </div>  
+{% endblock %}

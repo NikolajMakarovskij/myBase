@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import  OS, Building, Floor, Room, Employee, Workplace, monitor, motherboard, post, departament, software, workstation
 
-# Register your models here.
+@admin.register(Building)
+class Building(admin.ModelAdmin):
+    model = Building
+    fields = []
 
-admin.site.register(Building)
 @admin.register(Floor)
 class Floor(admin.ModelAdmin):
     model = Floor

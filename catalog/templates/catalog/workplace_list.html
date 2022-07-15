@@ -10,30 +10,23 @@
         <th class="table_head">Кабинет</th>
         <th class="table_head">Этаж</th>
         <th class="table_head">Здание</th>
-      <!--<th class="table_head">Количество рабочих мест</th>
-      <th class="table_head">Количество сотрудников</th> -->
 
     {% for Workplace in workplace_list %}
     <tbody>
     <tr>
     <td class="table_column_list">
-        {{ Workplace.name }} </a>
+        {{ Workplace.name }} 
     </td>
     <td class="table_column_list">
-        {{ Workplace.Room.name }} </a>
+        {{ Workplace.Room.name }} 
     </td>
     <td class="table_column_list">
-        {{ Workplace.Room.Floor.name }} </a>
+        {{ Workplace.Room.Floor.name }} 
     </td>
     <td class="table_column_list">
-        {{ Workplace.Room.Floor.Building.name }}</a>
+        {{ Workplace.Room.Floor.Building.name }}
     </td>
-    <!--<td>
-      {{ num_workplaceys.Room }}</a>
-    </td> 
-    <td>
-      {{ Room.num_employeyes }}</a>
-    </td>     -->
+
     {% endfor %}
     </tr>
     </tbody>

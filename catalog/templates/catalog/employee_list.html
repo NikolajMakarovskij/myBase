@@ -13,39 +13,32 @@
         <th class="table_head">Кабинет</th>
         <th class="table_head">Этаж</th>
         <th class="table_head">Здание</th>
-      <!--<th class="table_head">Количество рабочих мест</th>
-      <th class="table_head">Количество сотрудников</th> -->
 
     {% for Employee in employee_list %}
     <tbody class="table_tbody">
     <tr>
     <td class="table_column_list">
-        {{ Employee.name }} </a>
+        {{ Employee.name }} 
     </td>
     <td class="table_column_list">
-        {{ Employee.Workplace.name }} </a>
+        {{ Employee.Workplace.name }} 
     </td>
     <td class="table_column_list">
-        {{ Employee.post.name }} </a>
+        {{ Employee.post.name }} 
     </td>
     <td class="table_column_list">
-        {{ Employee.departament.name }} </a>
+        {{ Employee.departament.name }} 
     </td>
     <td class="table_column_list">
-        {{ Employee.Room.name }} </a>
+        {{ Employee.Room.name }} 
     </td>
     <td class="table_column_list">
-        {{ Employee.Room.Floor.name }} </a>
+        {{ Employee.Room.Floor.name }} 
     </td>
     <td class="table_column_list">
-        {{ Employee.Room.Floor.Building.name }}</a>
+        {{ Employee.Room.Floor.Building.name }}
     </td>
-    <!--<td>
-      {{ num_workplaceys.Room }}</a>
-    </td> 
-    <td>
-      {{ Room.num_employeyes }}</a>
-    </td>     -->
+
     {% endfor %}
     </tr>
     </tbody>

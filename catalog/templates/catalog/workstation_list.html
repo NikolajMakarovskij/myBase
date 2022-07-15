@@ -1,0 +1,70 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="col-sm-10"> 
+    <h1 style="text-align:center" >Список рабочих станций</h1>
+
+    {% if workstation_list %}
+    <table class="table_list">
+        <th class="table_head">Раб. станция</th>
+        <th class="table_head">Раб. место</th>
+        <th class="table_head">Сотрудник</th>
+        <th class="table_head">ОС</th>
+        <th class="table_head">CPU</th>
+        <th class="table_head">GPU</th>
+        <th class="table_head">RAM</th>
+        <th class="table_head">SDD</th>
+        <th class="table_head">материнская плата</th>
+
+
+    {% for workstation in workstation_list %}
+    <tbody class="table_tbody">
+    <tr>
+    <td class="table_column_list">
+        {{ workstation.name }} 
+    </td>
+    <td class="table_column_list">
+        {{ workstation.Workplace.name }} 
+    </td>
+    <td class="table_column_list">
+      {{ workstation.Employee.name }} 
+    </td>
+    <td class="table_column_list">
+      {{ workstation.OS.name }} 
+    </td>
+    <td class="table_column_list">
+      {{ workstation.CPU }} 
+    </td>
+    <td class="table_column_list">
+      {{ workstation.GPU }} 
+    </td>
+    <td class="table_column_list">
+      {{ workstation.RAM }} 
+    </td>
+    <td class="table_column_list">
+      {% if workstation.SSD %}
+      {{ workstation.SSD }} 
+      {% else %}
+      {{ workstation.HDD }} 
+      {% endif %}
+    </td>
+    <td class="table_column_list">
+      {% if workstation.motherboard %}
+      {{ workstation.motherboard }} 
+      {% else %}
+       
+      {% endif %}
+    </td>
+
+
+
+    {% endfor %}
+    </tr>
+    </tbody>
+    </table>
+
+    {% else %}
+      <p>Рабочие станции отсутствуют.</p>
+    {% endif %}
+  </div>  
+{% endblock %}

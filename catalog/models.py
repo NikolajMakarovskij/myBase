@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse
-import uuid # Required for unique book instances
-
-# Create your models here.
+import uuid 
 
 class Building(models.Model):
     name = models.CharField('Building',max_length=200)

@@ -1,2 +1,3 @@
 Django==4.0.5
+pillowS
 psycopg2-binary==2.8.5

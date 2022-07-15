@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import  Building, Floor, Room, Employee, Workplace, post, departament
+from .models import  OS, Building, Floor, Room, Employee, Workplace, monitor, motherboard, post, departament, software, workstation
 
 # Register your models here.
 
@@ -33,3 +33,47 @@ class departament(admin.ModelAdmin):
 class post(admin.ModelAdmin):
     model = post
     fields = []
+
+@admin.register(workstation)
+class workstation(admin.ModelAdmin):
+    model = workstation
+    fields = [('name', 'manufacturer'), 
+        ('Workplace', 'Employee'),
+        ('serial', 'serialImg'),
+        ('invent','inventImg'),
+        ('motherboard','monitor', 'OS'),
+        'CPU','GPU', 'RAM', 'SSD', 'HDD',
+        'DCPower', 'keyBoard', 'mouse',
+        ]
+
+@admin.register(software)
+class software(admin.ModelAdmin):
+    model = software
+    fields = []
+
+@admin.register(OS)
+class OS(admin.ModelAdmin):
+    model = OS
+    fields = []
+
+@admin.register(monitor)
+class monitor(admin.ModelAdmin):
+    model = monitor
+    fields = [
+        ('name','manufacturer'),
+        ('serial','serialImg'),
+        ('invent','inventImg'),
+
+    ]
+
+@admin.register(motherboard)
+class motherboard(admin.ModelAdmin):
+    model = motherboard
+    fields = [
+        ('name','manufacturer'),
+        ('serial','serialImg'),
+        'CPUSoket', 'RAMSlot', 'USBPort',
+        'COMPort', 'PCI_E', 'PCI', 'VGA',
+        'SATA', 'HDMI', 'DispayPort',
+        'powerSupply', 'powerSupplyCPU',
+    ]

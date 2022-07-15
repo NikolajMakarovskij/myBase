@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="col-sm-10"> 
+    <h1 style="text-align:center" >Список ПО</h1>
+
+    {% if software_list %}
+
+    <table class="table_list">
+      <th class="table_head">Раб. станция</th>
+      <th class="table_head">ОС</th>
+      <th class="table_head">ПО</th>
+      <th class="table_head">Лицензионный ключ</th>
+      <th class="table_head">фото</th>
+
+    {% for software in software_list %}
+    <tbody class="table_tbody">
+    <tr>
+    <td class="table_column_list">
+      {{ software.workstation.name }} 
+    </td>
+    <td class="table_column_list">
+      {{ software.workstation.OS.name }} 
+    </td>
+    <td class="table_column_list">
+      {{ software.name }} 
+    </td>
+    <td class="table_column_list">
+      {% if software.licenseKeyFile %}
+      <a href="{{ software.licenseKeyFile.url }}">{{software.licenseKeyText}}</a> 
+      {% else %}
+      {{software.licenseKeyText}}
+      {% endif %}
+    </td>
+    <td class="table_column_list">
+      {% if software.licenseKeyImg %}
+      <a href="{{ software.licenseKeyImg.url }}">
+      <img src="{{ software.licenseKeyImg.url }}">
+      {% else %}
+      
+      {% endif %}
+      </a>
+    </td>
+
+    {% endfor %}
+    </tr>
+    </tbody>
+    </table>
+
+    {% else %}
+      <p>Програмное обеспечение отсутствует.</p>
+    {% endif %}
+  </div>  
+{% endblock %}

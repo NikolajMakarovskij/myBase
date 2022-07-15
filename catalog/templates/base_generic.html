@@ -9,7 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <!-- Добавление дополнительного статического CSS файла -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -25,7 +24,7 @@
         {% if user.is_authenticated %}
           <li>User: {{ user.get_username }}</li>
           <li><a href="{% url 'login' %}">Выход</a></li>
-          <li><a href="http://localhost:8000/admin/">админка</a></li>
+          <li><a href="http://localhost:8080/admin/">админка</a></li>
         {% else %}
           
         {% endif %} 
@@ -33,6 +32,8 @@
             <li><a href="{% url 'index' %}">Главная</a></li>
             <li><a href="{% url 'room' %}">Кабинеты</a></li>
             <li><a href="{% url 'workplace' %}">Раб. место</a></li>
+            <li><a href="{% url 'software' %}">СОФТ</a></li>
+            <li><a href="{% url 'workstation' %}">Раб. станция</a></li>
 
       </ul>
      {% endblock %}

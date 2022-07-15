@@ -1,5 +1,4 @@
 {% extends "base_generic.html" %}
-  <!-- Добавление дополнительного статического CSS файла -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
@@ -15,7 +14,7 @@
       </a>
     </div>
     <div class="col-sm-3">
-      <a class="button_link" href="#">
+      <a class="button_link" href="{% url 'workstation' %}">
         <div class="square"> 
           <div class="text">Комплек-<br>тующие</div>
         </div>
@@ -32,7 +31,7 @@
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-3">
-      <a class="button_link" href="#">
+      <a class="button_link" href="{% url 'software' %}">
         <div class="square">
           <div class="text">Софт</div>
         </div>

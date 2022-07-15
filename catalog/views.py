@@ -1,5 +1,6 @@
+from unicodedata import name
 from django.shortcuts import render
-from .models import Building, Floor, Room, Employee, Workplace, departament, post
+from .models import Building, Floor, Room, Employee, Workplace, departament, post, software, workstation
 from django.views import generic
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
@@ -7,22 +8,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 
-
-# Create your views here.
-
 def index(request):
     """
     Функция отображения для домашней страницы сайта.
     """
-    # Генерация "количеств" некоторых главных объектов
-    num_buildings=Building.objects.all().count()
-    num_floors=Floor.objects.all().count()
-    num_rooms=Room.objects.all().count()
-    num_employeyes=Employee.objects.all().count()
-    num_workplaceyes=Workplace.objects.all().count()
-    num_departaments=departament.objects.all().count()
-    num_posts=post.objects.all().count()
-
     # Number of visits to this view, as counted in the session variable.
     num_visits=request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
@@ -35,14 +24,6 @@ def index(request):
         'index.html',
         context={
             'num_visits':num_visits,
-            'num_buildings':num_buildings,
-            'num_floors':num_floors,
-            'num_rooms':num_rooms,
-            'num_employeyes':num_employeyes,
-            'num_workplaceyes':num_workplaceyes,
-            'num_departaments':num_departaments,
-            'num_posts':num_posts,
-
         }, 
     )
 
@@ -61,8 +42,58 @@ class EmployeeListView(generic.ListView):
 class WorkplaceListView(generic.ListView):
     model = Workplace
 
+def workplace_list(request): 
+    buildings=Building.objects.all().order_by("name")
+    floors=Floor.objects.all().order_by("name")
+    workplaceyes=Workplace.objects.all().order_by("name")
+    return render(
+        request,
+        'workplace_list.html',
+        context={
+            'workplace_list.html':workplace_list,
+            'buildings':buildings,
+            'floors':floors,
+            'workplaceyes':workplaceyes,
+
+        }
+    )
+
 class departamentListView(generic.ListView):
     model = departament
 
 class postListView(generic.ListView):
     model = post
+
+class workstationListView(generic.ListView):
+    model = workstation
+
+def workstation_list(request): 
+    buildings=Building.objects.all().order_by("name")
+    floors=Floor.objects.all().order_by("name")
+    workplaceyes=Workplace.objects.all().order_by("name")
+    return render(
+        request,
+        'workstation_list.html',
+        context={
+            'workstation_list.html':workstation_list,
+            'buildings':buildings,
+            'floors':floors,
+            'workplaceyes':workplaceyes,
+
+        }
+    )
+
+class softwareListView(generic.ListView):
+    model = software
+
+def software_list(request):
+    workstations=workstation.objects.all().order_by(name) 
+    return render(
+        request,
+        'software_list.html',
+        context={
+            'software_list.html':software_list,
+            'workstations':workstations
+
+        }
+    )

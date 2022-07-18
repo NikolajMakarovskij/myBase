@@ -1,0 +1,224 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="col-sm-12">
+  <div class="row">
+    <h1>Информация о системе</h1>
+    <div class="col-sm-3">
+      <p>Номер рабочей станции:</br> {{ workstation.name }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>инвентарный номер:</br> 
+        {% if workstation.inventImg %}
+        <a href="{{ workstation.inventImg.url }}" >
+          <img src="{{ workstation.inventImg.url }}">
+        </a>
+        {% elif workstation.invent %}
+          {{ workstation.invent }}
+        {% else %}
+        
+        {% endif %}
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p>Номер рабочего места:</br> {{ workstation.Workplace.name }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Номер кабинета: </br>{{ workstation.Workplace.Room.name }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Номер этажа: </br> {{ workstation.Workplace.Floor.name }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Здание:</br> {{ workstation.Workplace.Building.name }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <h1>Информация о сотруднике </h1>
+    <div class="col-sm-3">
+      <p>ФИО сотрудника: </br> {{ workstation.Employee.name }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Отдел: </br> {{ workstation.Employee.departament }}</p>
+    </div> 
+    <div class="col-sm-3">
+      <p>Должность: </br> {{ workstation.Employee.post }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <h1>Конфигурация системы</h1>
+    <div class="col-sm-3">
+      <p>Название ОС: </br> {{ workstation.OS.name }}</p>
+    </div>
+    <div class="col-sm-9">
+      <p>Лицензионный ключ: </br>
+        {% if workstation.OS.licenseKeyFile %}
+          <a href="{{ workstation.OS.licenseKeyFile.url }}">ссылка</a> 
+        {% elif workstation.OS.licenseKeyImg %}
+          <a href="{{ workstation.OS.licenseKeyImg.url }}">
+            <img src="{{ workstation.OS.licenseKeyImg.url }}">
+          </a>
+        {% elif workstation.OS.licenseKeyText %}
+          {{ workstation.OS.licenseKeyText }}
+        {% else %}
+          
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Название производителя: </br> {{ workstation.manufacturer }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Название модели: </br> {{ workstation.modelComputer }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Инвентарный номер:</br> 
+        {% if workstation.serialImg %}
+        <a href="{{ workstation.serialImg.url }}">
+          <img src="{{ workstation.serialImg.url }}">
+        </a>
+        {% elif workstation.serial %}
+          {{ workstation.serial }}
+        {% else %}
+        
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Материнская плата: </br> <a class="text-decoration-none text-reset" href="#motherboard">{{ workstation.motherboard }}</a></p>
+    </div>
+    <div class="col-sm-3">
+      <p>Монитор: </br> <a href="#monitor">{{ workstation.monitor }}</a></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>CPU: </br> {{ workstation.CPU }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>GPU: </br> {{ workstation.GPU }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Оперативная память: </br> {{ workstation.RAM }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Накопитель SSD: </br> {{ workstation.SSD }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Накопитель HDD: </br> {{ workstation.HDD }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Блок питания: </br> {{ workstation.DCPower }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Клавиатура: </br> {{ workstation.keyBoard }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Мышь: </br> {{ workstation.mouse }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <h1><a name="monitor"></a>Монитор</h1>
+    <div class="col-sm-3">
+      <p>Производитель: </br> {{ workstation.monitor.manufacturer }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Модель: </br> {{ workstation.monitor.name }}</p>
+    </div> 
+    <div class="col-sm-3">
+      <p>Серийный номер: </br>
+        {% if workstation.monitor.serialImg %}
+        <a href="{{ workstation.monitor.serialImg.url }}">
+          <img src="{{ workstation.monitor.serialImg.url }}">
+        </a>
+        {% elif workstation.monitor.serial %}
+          {{ workstation.monitor.serial }}
+        {% else %}
+        
+        {% endif %}
+      </p>
+    </div>
+    <div class="col-sm-3">
+      <p>Инвентарный номер: </br>
+        {% if workstation.monitor.inventImg %}
+        <a href="{{ workstation.monitor.inventImg.url }}">
+          <img src="{{ workstation.monitor.inventImg.url }}">
+        </a>
+        {% elif workstation.monitor.invent %}
+          {{ workstation.monitor.invent }}
+        {% else %}
+        
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <h1><a name="motherboard"></a>Материнская плата</h1>
+    <div class="col-sm-3">
+      <p>Производитель: </br> {{ workstation.motherboard.manufacturer }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Модель: </br> {{ workstation.motherboard.name }}</p>
+    </div> 
+    <div class="col-sm-3">
+      <p>Серийный номер: </br>
+        {% if workstation.motherboard.serialImg %}
+        <a href="{{ workstation.motherboard.serialImg.url }}">
+          <img src="{{ workstation.motherboard.serialImg.url }}">
+        </a>
+        {% elif workstation.motherboard.serial %}
+          {{ workstation.motherboard.serial }}
+        {% else %}
+        
+        {% endif %}
+      </p>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Сокет: </br> {{ workstation.motherboard.CPUSoket }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>Питание CPU: </br> {{ workstation.motherboard.powerSupplyCPU }}</p>
+    </div> 
+    <div class="col-sm-3">
+      <p>Питание материнской платы: </br> {{ workstation.motherboard.powerSupply }}</p>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>Слоты оперативной памяти: </br> {{ workstation.motherboard.RAMSlot }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>PCI Expres: </br> {{ workstation.motherboard.PCI_E }}</p>
+    </div> 
+    <div class="col-sm-3">
+      <p>PCI: </br> {{ workstation.motherboard.PCI }}</p>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>VGA: </br> {{ workstation.motherboard.VGA }}</p>
+    </div>
+    <div class="col-sm-3">
+      <p>HDMI: </br> {{ workstation.motherboard.HDMI }}</p>
+    </div> 
+    <div class="col-sm-3">
+      <p>DispayPort: </br> {{ workstation.motherboard.DispayPort }}</p>
+    </div>  
+  </div>
+
+</div>
+
+</div>  
+{% endblock %}
+
+

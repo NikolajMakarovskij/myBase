@@ -1,10 +1,9 @@
 from unicodedata import name
 from django.shortcuts import render
-from .models import Building, Floor, Room, Employee, Workplace, departament, post, software, workstation
+from .models import Room, Employee, Workplace, software, workstation, monitor, motherboard
 from django.views import generic
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 
@@ -27,73 +26,60 @@ def index(request):
         }, 
     )
 
-class BuildingListView(generic.ListView):
-    model = Building
-
-class FloorListView(generic.ListView):
-    model = Floor
-
-class RoomListView(generic.ListView):
-    model = Room
-
 class EmployeeListView(generic.ListView):
     model = Employee
+    paginate_by =  20
 
 class WorkplaceListView(generic.ListView):
     model = Workplace
+    paginate_by =  20
 
 def workplace_list(request): 
-    buildings=Building.objects.all().order_by("name")
-    floors=Floor.objects.all().order_by("name")
-    workplaceyes=Workplace.objects.all().order_by("name")
     return render(
         request,
         'workplace_list.html',
         context={
             'workplace_list.html':workplace_list,
-            'buildings':buildings,
-            'floors':floors,
-            'workplaceyes':workplaceyes,
-
         }
     )
 
-class departamentListView(generic.ListView):
-    model = departament
-
-class postListView(generic.ListView):
-    model = post
-
 class workstationListView(generic.ListView):
     model = workstation
+    paginate_by =  20
 
 def workstation_list(request): 
-    buildings=Building.objects.all().order_by("name")
-    floors=Floor.objects.all().order_by("name")
-    workplaceyes=Workplace.objects.all().order_by("name")
     return render(
         request,
         'workstation_list.html',
         context={
             'workstation_list.html':workstation_list,
-            'buildings':buildings,
-            'floors':floors,
-            'workplaceyes':workplaceyes,
-
         }
+    )
+
+class workstationDetailView(generic.DetailView):
+    model = workstation
+
+def workstation_detail_view(request,pk):
+    try:
+        workstation_id=workstation.objects.get(pk=pk)
+    except workstation.DoesNotExist:
+        raise Http404("Не удалось найти детальную информацию")
+
+    return render(
+        request,
+        'catalog/workstation_detail.html',
+        context={'workstation':workstation_id,}
     )
 
 class softwareListView(generic.ListView):
     model = software
+    paginate_by =  20
 
 def software_list(request):
-    workstations=workstation.objects.all().order_by(name) 
     return render(
         request,
         'software_list.html',
         context={
-            'software_list.html':software_list,
-            'workstations':workstations
-
+          'software_list.html':software_list,
         }
     )

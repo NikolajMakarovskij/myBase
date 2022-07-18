@@ -1,12 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <div class="col-sm-10"> 
+  <div class="col-sm-12"> 
     <h1 style="text-align:center" >Список ПО</h1>
 
     {% if software_list %}
 
     <table class="table_list">
+      <th class="table_head">Сотрудник</th>
       <th class="table_head">Раб. станция</th>
       <th class="table_head">ОС</th>
       <th class="table_head">ПО</th>
@@ -16,35 +17,36 @@
     {% for software in software_list %}
     <tbody class="table_tbody">
     <tr>
-    <td class="table_column_list">
-      {{ software.workstation.name }} 
-    </td>
-    <td class="table_column_list">
-      {{ software.workstation.OS.name }} 
-    </td>
-    <td class="table_column_list">
-      {{ software.name }} 
-    </td>
-    <td class="table_column_list">
-      {% if software.licenseKeyFile %}
-      <a href="{{ software.licenseKeyFile.url }}">{{software.licenseKeyText}}</a> 
-      {% else %}
-      {{software.licenseKeyText}}
-      {% endif %}
-    </td>
-    <td class="table_column_list">
-      {% if software.licenseKeyImg %}
-      <a href="{{ software.licenseKeyImg.url }}">
-      <img src="{{ software.licenseKeyImg.url }}">
-      {% else %}
+      <td class="table_column_list">
+        {{ software.Employee.name }} 
+      </td>
+      <td class="table_column_list">
+        <a href="{{ software.workstation.get_absolute_url }}">{{ software.workstation.name }}</a> 
+      </td>
+      <td class="table_column_list">
+        {{ software.workstation.OS.name }} 
+      </td>
+      <td class="table_column_list">
+        {{ software.name }} 
+      </td>
+      <td class="table_column_list">
+        {% if software.licenseKeyFile %}
+          <a href="{{ software.licenseKeyFile.url }}">{{software.licenseKeyText}}</a> 
+        {% else %}
+        {{software.licenseKeyText}}
+        {% endif %}
+      </td>
+      <td class="table_column_list">
+        {% if software.licenseKeyImg %}
+          <a href="{{ software.licenseKeyImg.url }}">
+          <img src="{{ software.licenseKeyImg.url }}"></a>
+        {% else %}
       
-      {% endif %}
-      </a>
-    </td>
-
-    {% endfor %}
+        {% endif %}  
+      </td>
     </tr>
     </tbody>
+    {% endfor %}
     </table>
 
     {% else %}
@@ -52,3 +54,20 @@
     {% endif %}
   </div>  
 {% endblock %}
+{% block pagination %}
+  {% if is_paginated %}
+      <div class="pagination">
+          <span class="page-links">
+              {% if page_obj.has_previous %}
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+              <span class="page-current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% if page_obj.has_next %}
+                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+              {% endif %}
+          </span>
+      </div>
+  {% endif %}
+{% endblock %} 

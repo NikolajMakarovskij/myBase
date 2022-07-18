@@ -117,7 +117,12 @@ a.button_link:hover {
     text-align: start;
     padding: 5px;
     border-radius: 5px;
- 
+}
+.noDecoration,
+.noDecoration:active, 
+.noDecoration:hover {
+    text-decoration: none;
+    color: hsl(207, 7%, 30%);
 }
 .table_tbody tr:nth-child(odd){
 	background: rgba(0, 174, 239, 20%);;

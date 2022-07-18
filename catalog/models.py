@@ -32,12 +32,10 @@ class Room(models.Model):
         return self.name
     class Meta:
         verbose_name_plural = 'Кабинет'
+        ordering = ["Building", "Floor", "name"]
 
 class Employee(models.Model):
     name = models.CharField(max_length=50, help_text="Введите ФИО сотрудника")
-    Building = models.ForeignKey('Building', on_delete=models.SET_NULL,blank=True, null=True)
-    Floor = models.ForeignKey('Floor', on_delete=models.SET_NULL,blank=True, null=True)
-    Room = models.ForeignKey('Room', on_delete=models.SET_NULL,blank=True, null=True)
     Workplace = models.ForeignKey('Workplace', on_delete=models.SET_NULL,blank=True, null=True)
     departament = models.ForeignKey('departament', on_delete=models.SET_NULL,blank=True, null=True)
     post = models.ForeignKey('Post', on_delete=models.SET_NULL,blank=True, null=True)
@@ -46,17 +44,17 @@ class Employee(models.Model):
         return self.name
     class Meta:
         verbose_name_plural = 'Сотрудник'
+        ordering = ["name", "Workplace"]
 
 class Workplace(models.Model):
     name = models.CharField(max_length=50, help_text="Введите номер рабочего места")
-    Building = models.ForeignKey('Building', on_delete=models.SET_NULL,blank=True, null=True)
-    Floor = models.ForeignKey('Floor', on_delete=models.SET_NULL,blank=True, null=True)
     Room = models.ForeignKey('Room', on_delete=models.SET_NULL,blank=True, null=True)
 
     def __str__(self):
         return self.name
     class Meta:
         verbose_name_plural = 'Рабочее место'
+        ordering = ["name","Room"]
 
 class departament(models.Model):
     name = models.CharField(max_length=50, help_text="Введите название отдела")
@@ -78,6 +76,8 @@ class post(models.Model):
 class software (models.Model):
     name = models.CharField(max_length=50, help_text="ВВедите название ПО")
     workstation = models.ForeignKey('workstation', on_delete=models.SET_NULL,blank=True, null=True)
+    Employee = models.ForeignKey('Employee', on_delete=models.SET_NULL,blank=True, null=True)
+    manufacturer = models.CharField(max_length=200, blank=True, help_text="Описание производителя")
     licenseKeyText = models.CharField(max_length=50, blank=True, null=True, help_text="Введите лицензтонный ключ")
     licenseKeyImg = models.ImageField(upload_to='soft/', blank=True, null=True, help_text="прикрепите файл")
     licenseKeyFile = models.FileField(upload_to='soft/', blank=True, null=True, help_text="прикрепите файл")
@@ -86,6 +86,7 @@ class software (models.Model):
         return self.name
     class Meta:
         verbose_name_plural = 'ПО'
+        ordering = [ "Employee", "name"]
 
 class OS (models.Model):
     name = models.CharField(max_length=50, help_text="Введите Название ОС")
@@ -108,6 +109,7 @@ class workstation(models.Model):
     invent = models.CharField(max_length=50, blank=True, help_text="Введите инвентаризационный номер")
     inventImg = models.ImageField(upload_to='workstation/invent/', blank=True, null=True, help_text="прикрепите файл")
     manufacturer = models.CharField(max_length=200, blank=True, help_text="Описание производителя")
+    modelComputer = models.CharField(max_length=200, blank=True, help_text="Введите название модели")
     motherboard = models.ForeignKey('motherboard', on_delete=models.SET_NULL, blank=True, null=True)
     monitor = models.ForeignKey('monitor', on_delete=models.SET_NULL,blank=True, null=True)
     CPU = models.TextField(max_length=200, blank=True, help_text="Описание CPU")
@@ -121,8 +123,11 @@ class workstation(models.Model):
 
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse('workstation-detail', args=[str(self.id)])
     class Meta:
         verbose_name_plural = 'Рабочая станция'
+        ordering = ["Employee", "name", "Workplace"]
 
 class monitor (models.Model):
     manufacturer = models.CharField(max_length=50, blank=True, help_text="Введите Название производителя")

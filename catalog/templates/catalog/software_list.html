@@ -21,7 +21,7 @@
         {{ software.Employee.name }} 
       </td>
       <td class="table_column_list">
-        <a href="{{ software.workstation.get_absolute_url }}">{{ software.workstation.name }}</a> 
+        <a class="noDecoration" href="{{ software.workstation.get_absolute_url }}">{{ software.workstation.name }}</a> 
       </td>
       <td class="table_column_list">
         {{ software.workstation.OS.name }} 
@@ -31,7 +31,7 @@
       </td>
       <td class="table_column_list">
         {% if software.licenseKeyFile %}
-          <a href="{{ software.licenseKeyFile.url }}">{{software.licenseKeyText}}</a> 
+          <a class="noDecoration" href="{{ software.licenseKeyFile.url }}">{{software.licenseKeyText}}</a> 
         {% else %}
         {{software.licenseKeyText}}
         {% endif %}

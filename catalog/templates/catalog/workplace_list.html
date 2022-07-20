@@ -25,6 +25,14 @@
     </td>
     <td class="table_column_list">
         {{ Workplace.Room.Floor.Building.name }}
+        <form id="label" action="active" method="post">
+            {% csrf_token %}
+            <label>
+                    rayh
+            </label>
+            <input type="submit" value="Yes, delete." />
+            
+        </form>
     </td>
 
     {% endfor %}
@@ -36,9 +44,8 @@
       <p>Нет зданий.</p>
     {% endif %}
   </div>  
-{% endblock %}
-{% block pagination %}
-  {% if is_paginated %}
+    {% block pagination %}
+    {% if is_paginated %}
       <div class="pagination">
           <span class="page-links">
               {% if page_obj.has_previous %}
@@ -52,5 +59,6 @@
               {% endif %}
           </span>
       </div>
-  {% endif %}
-{% endblock %} 
+    {% endif %}
+    {% endblock %} 
+{% endblock %}

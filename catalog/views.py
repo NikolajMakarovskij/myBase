@@ -1,7 +1,8 @@
 from unicodedata import name
 from django.shortcuts import render
-from .models import Room, Employee, Workplace, software, workstation, monitor, motherboard
+from .models import Building, Employee, Workplace, software, workstation
 from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -83,3 +84,7 @@ def software_list(request):
           'software_list.html':software_list,
         }
     )
+
+class AuthorUpdate(UpdateView):
+    model = Building
+    fields = ['name']

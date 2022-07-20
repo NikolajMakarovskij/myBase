@@ -13,3 +13,7 @@
         docker-compose up -d --build
     миграция БД
         docker-compose exec web python3 manage.py makemigrations
+
+
+запуск сервера из папки
+        python3 manage.py runserver

@@ -47,9 +47,8 @@
     {% else %}
       <p>Нет зданий.</p>
     {% endif %}
-  </div>  
-{% endblock %}
-{% block pagination %}
+  </div>
+  {% block pagination %}
   {% if is_paginated %}
       <div class="pagination">
           <span class="page-links">
@@ -65,4 +64,6 @@
           </span>
       </div>
   {% endif %}
-{% endblock %} 
+{% endblock %}   
+{% endblock %}
+ 

@@ -33,7 +33,7 @@ class EmployeeListView(generic.ListView):
 
 class WorkplaceListView(generic.ListView):
     model = Workplace
-    paginate_by =  20
+    paginate_by =  1
 
 def workplace_list(request): 
     return render(

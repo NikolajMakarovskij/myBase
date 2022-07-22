@@ -1,11 +1,36 @@
-.sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
-    text-decoration-color: hsl(207, 7%, 30%); 
+.vert{
+    height: 100vh;
 }
-.body {
-    background-color: hsla(208, 100%, 90%, 0.672);
+.navmenu{
+    color: #ffffff;   
+}
+.navmenu>ul{
+    list-style-type: none
+}
+.navmenu ul li a,
+.navmenu ul li a:hover{
+    color: #aaaaaa;
+    list-style-type: none;
+    text-decoration: none;
+}
+.nav-pills .active,
+.nav-pills .nav-item:hover {
+    background-color: rgba(128, 128, 128, 0.850) !important;
+    border-color: rgba(128, 128, 128, 0.850) !important;
+    color: #ffffff;
+}
+.btn-primary,
+.btn-primary:visited{
+    background-color: rgba(128, 128, 128, 0.850) !important;
+    border-color: rgba(128, 128, 128, 0.850) !important
+}     
+.btn-primary:hover,
+.btn-primary:focus{
+    background-color: rgba(128, 128, 128, 0.750) !important;
+    border-color: rgba(128, 128, 128, 0.750) !important
+}
+.bodybackground {
+    background-color: rgba(228, 224, 224, 0.278);
     text-decoration-color: hsl(207, 7%, 30%); 
 }
 .login{
@@ -63,24 +88,35 @@
     height: 200px;
     border: solid;
     border-radius: 5px;
-    background-color: rgb(0, 174, 239);
-    border-color: rgb(0, 174, 239, 50%);
-    box-shadow: 0px 0px 2px 2px rgba(0, 174, 239, 0.5);
-    text-align: center;
-    font-size: 28pt;
-    font-family: 'Times New Roman', Times, serif;
-    text-decoration-color: hsl(207, 7%, 30%);    
-}
-.text{
-    margin: auto;
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.3), -5px -10px 20px rgba(255,255,255,0.5);   
 }
 .square:hover {
-    transform: scale(1.25,1.25);
-    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
+    transform: scale(1.25,1.25);   
 }
 .square:active{
     transform: scale(1.2,1.2);
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+.iconIndex{
+    height: 60%;
+    filter: invert(30%);
+}
+.iconTable{
+    height: 30px;
+}
+.iconHeader{
+    height: 40px;
+}
+.iconTitle{
+    height: 20px;
+}
+.maxheight{
+    height: 100%;
+}
+.nodecorationIndex a,
+.nodecorationIndex a:hover,
+.nodecorationIndex a:active,
+.nodecorationIndex a:visited{
+    text-decoration: none;
 }
 a.button_link,
 a.button_link:active,
@@ -88,46 +124,58 @@ a.button_link:hover {
     text-decoration: none;
     color: hsl(207, 7%, 30%);
 }
-.table_list{
-    width: 100%;
-    border: 2px;
-    border-color: black;
-    border-spacing: 10px; 
-    font-size: 14pt;
-    font-family: 'Times New Roman', Times, serif;
-    text-decoration-color: hsl(207, 7%, 30%);  
-	border-collapse: separate;
-   
+.mtop{
+    margin-top: 20px;
+    
 }
-.table_head{
-    border-spacing: 10px; 
-    border: 1px solid gray;
-    border-color: black;
-    background-color: rgba(0, 174, 239, 60%);
-    text-align: center;
-    padding: 5px;
-    border-radius: 5px;
- 
+
+.pagination {
+    color: #ffffff;
 }
-.table_column_list{
-    border-spacing: 10px; 
-    border: 1px solid rgb(170, 170, 170);
-    border-color: black;
-    background-color: rgba(0, 174, 239, 20%);
-    text-align: start;
-    padding: 5px;
-    border-radius: 5px;
+
+.pagination ul {
+    color: #ffffff;
 }
+
+.pagination li {
+    color: rgba(128, 128, 128, 0.750);
+}
+
+.pagination a {
+    color: hsl(207, 7%, 30%);
+    text-decoration: none;
+}
+
+.pagination a:hover,
+.pagination .active a {
+    background-color: rgba(128, 128, 128, 0.750) !important;
+    border-color: rgba(128, 128, 128, 0.750) !important;
+    color: #ffffff;
+}
+
+.pagination a:focus {
+    background-color: rgba(128, 128, 128, 0.750);
+    color: #ffffff;
+}
+
+
+.pagination .active a {
+    color: #ffffff;
+    cursor: default;
+}
+
+.pagination .disabled span,
+.pagination .disabled a,
+.pagination .disabled a:hover {
+    color: #999999;
+    background-color: transparent;
+    cursor: default;
+}
+
 .noDecoration,
 .noDecoration:active, 
 .noDecoration:hover {
     text-decoration: none;
     color: hsl(207, 7%, 30%);
 }
-.table_tbody tr:nth-child(odd){
-	background: rgba(0, 174, 239, 20%);;
-}
- 
-.table_tbody tr:nth-child(even){
-	background: rgba(0, 174, 239);;
-}
+

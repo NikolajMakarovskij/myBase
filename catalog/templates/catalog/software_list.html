@@ -1,73 +1,91 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <div class="col-sm-12"> 
+{% load static %}
+<div class="col-sm-12 table-responsive-xxl"> 
+  <caption>
     <h1 style="text-align:center" >Список ПО</h1>
-
-    {% if software_list %}
-
-    <table class="table_list">
-      <th class="table_head">Сотрудник</th>
-      <th class="table_head">Раб. станция</th>
-      <th class="table_head">ОС</th>
-      <th class="table_head">ПО</th>
-      <th class="table_head">Лицензионный ключ</th>
-      <th class="table_head">фото</th>
-
+  </caption>
+  
+  {% if software_list %}
+  <table class="table align-middle table-hover" style="text-align:center">
+    <thead>
+      <tr>
+        <th scope="col">Сотрудник</th>
+        <th scope="col">Раб. место</th>
+        <th scope="col">Раб. станция</th>
+        <th scope="col">ОС</th>
+        <th scope="col">ПО</th>
+        <th scope="col">Лицензионный ключ</th>
+        <th scope="col">фото</th>
+      </tr>
+    </thead>
+  <tbody style="text-align:center">
     {% for software in software_list %}
-    <tbody class="table_tbody">
     <tr>
-      <td class="table_column_list">
-        {{ software.Employee.name }} 
+      <td>{{ software.Employee.name }}</td>
+      <td>{{ software.workstation.Workplace.name }}</td>
+      <td>
+        <a class="noDecoration" href="{{ software.workstation.get_absolute_url }}">
+          {{ software.workstation.name }}
+        </a>
       </td>
-      <td class="table_column_list">
-        <a class="noDecoration" href="{{ software.workstation.get_absolute_url }}">{{ software.workstation.name }}</a> 
-      </td>
-      <td class="table_column_list">
-        {{ software.workstation.OS.name }} 
-      </td>
-      <td class="table_column_list">
-        {{ software.name }} 
-      </td>
-      <td class="table_column_list">
+      <td>{{ software.workstation.OS.name }}</td>
+      <td>{{ software.name }}</td>
+      <td>
         {% if software.licenseKeyFile %}
-          <a class="noDecoration" href="{{ software.licenseKeyFile.url }}">{{software.licenseKeyText}}</a> 
+          <a class="noDecoration" href="{{ software.licenseKeyFile.url }}">
+            <img src="{% static 'images/filetype-key.svg' %}" class="iconTable">
+          </a>
         {% else %}
-        {{software.licenseKeyText}}
+          {{software.licenseKeyText}}
         {% endif %}
       </td>
-      <td class="table_column_list">
+      <td>
         {% if software.licenseKeyImg %}
           <a href="{{ software.licenseKeyImg.url }}">
-          <img src="{{ software.licenseKeyImg.url }}"></a>
+            <img src="{{ software.licenseKeyImg.url }}">
+          </a>
         {% else %}
-      
-        {% endif %}  
+          <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable">
+        {% endif %}
       </td>
     </tr>
-    </tbody>
     {% endfor %}
-    </table>
-
+  </tbody>
+  </table>
     {% else %}
       <p>Програмное обеспечение отсутствует.</p>
     {% endif %}
-  </div> 
-  {% block pagination %}
-  {% if is_paginated %}
-      <div class="pagination">
-          <span class="page-links">
-              {% if page_obj.has_previous %}
-                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
-              {% endif %}
-              <span class="page-current">
-                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-              </span>
-              {% if page_obj.has_next %}
-                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
-              {% endif %}
-          </span>
-      </div>
-  {% endif %}
-{% endblock %}  
+</div>
+  <div class="mtop">
+    {% block pagination %}
+    {% if is_paginated %}
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    {% if page_obj.has_previous %}
+                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    {% endif %}
+                </li>
+                {% for p in page_obj.paginator.page_range %}
+                {% if p == page_obj.number %}
+                <li class="page-item active" aria-current="page" style="background-color: black;">
+                    <a class="page-link" href="{{ request.path }}?page={{ p }}">{{ p }}</a>
+                </li>
+                {% else %}
+                  <li class="page-item" >
+                    <a class="page-link" href="{{ request.path }}?page={{ p }}">{{ p }}</a>
+                  </li>
+                {% endif %}
+                {% endfor %}
+                <li class="page-item">
+                    {% if page_obj.has_next %}
+                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+                    {% endif %}
+                </li>
+            </ul>
+    {% endif %}
+  {% endblock %}  
+  </div>
 {% endblock %}

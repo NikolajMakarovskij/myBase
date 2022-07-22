@@ -1,225 +1,664 @@
-{% extends "base_generic.html" %}
+{% extends "list_detail_generic.html" %}
 
 {% block content %}
+{% load static %}
 <div class="col-sm-12">
-  <div class="row">
-    <h1>Информация о системе</h1>
-    <div class="col-sm-3">
-      <p>Номер рабочей станции:</br> {{ workstation.name }}</p>
+  <div class="card-header text-center">
+    <a name="systemInfo"></a>
+    <h1 class="card-title">
+      <img src="{% static 'images/pc-display-horizontal.svg' %}" class="iconHeader">
+      Информация о системе
+    </h1>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Номер рабочей станции:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.name }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p>инвентарный номер:</br> 
-        {% if workstation.inventImg %}
-        <a href="{{ workstation.inventImg.url }}" >
-          <img src="{{ workstation.inventImg.url }}">
-        </a>
-        {% elif workstation.invent %}
-          {{ workstation.invent }}
-        {% else %}
-        
-        {% endif %}
-      </p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Инвентарный номер:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">
+            {% if workstation.inventImg %}
+            <a href="{{ workstation.inventImg.url }}" >
+              <img src="{{ workstation.inventImg.url }}">
+            </a>
+            {% elif workstation.invent %}
+              {{ workstation.invent }}
+            {% else %}
+              <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable"></a>
+            {% endif %}
+          </h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <p>Номер рабочего места:</br> {{ workstation.Workplace.name }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Номер кабинета: </br>{{ workstation.Workplace.Room.name }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Номер этажа: </br> {{ workstation.Workplace.Floor.name }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Здание:</br> {{ workstation.Workplace.Building.name }}</p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Номер рабочего места:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Workplace.name }}</h5>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <h1>Информация о сотруднике </h1>
-    <div class="col-sm-3">
-      <p>ФИО сотрудника: </br> {{ workstation.Employee.name }}</p>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/door-open.svg' %}" class="iconTitle">
+            Номер кабинета:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Workplace.Room.name }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p>Отдел: </br> {{ workstation.Employee.departament }}</p>
-    </div> 
-    <div class="col-sm-3">
-      <p>Должность: </br> {{ workstation.Employee.post }}</p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/door-open.svg' %}" class="iconTitle">
+            Номер этажа:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Workplace.Room.Floor.name }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/building.svg' %}" class="iconTitle">
+            Здание:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Workplace.Room.Floor.Building.name }}</h5>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <h1>Конфигурация системы</h1>
-    <div class="col-sm-3">
-      <p>Название ОС: </br> {{ workstation.OS.name }}</p>
+  <div class="card-header mt-3 text-center">
+    <a name="infoEmployee"></a>
+    <h1 class="card-title">
+      <img src="{% static 'images/person.svg' %}" class="iconHeader">
+      Информация о сотруднике
+    </h1>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            ФИО сотрудника:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Employee.name }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-9">
-      <p>Лицензионный ключ: </br>
-        {% if workstation.OS.licenseKeyFile %}
-          <a href="{{ workstation.OS.licenseKeyFile.url }}">ссылка</a> 
-        {% elif workstation.OS.licenseKeyImg %}
-          <a href="{{ workstation.OS.licenseKeyImg.url }}">
-            <img src="{{ workstation.OS.licenseKeyImg.url }}">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Отдел:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Employee.departament }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Должность:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.Employee.post }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-header mt-3 text-center">
+    <a name="configuration"></a> 
+    <h1 class="card-title">
+      <img src="{% static 'images/journal.svg' %}" class="iconHeader">
+      Конфигурация системы
+    </h1>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/pencil-square.svg' %}" class="iconTitle">
+            Название ОС:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.OS.name }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/key.svg' %}" class="iconTitle">
+            Лицензионный ключ:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          {% if workstation.OS.licenseKeyFile %}
+            <a href="{{ workstation.OS.licenseKeyFile.url }}">
+              <img src="{% static 'images/filetype-key.svg' %}" class="iconTable"></a> 
+          {% elif workstation.OS.licenseKeyImg %}
+            <a href="{{ workstation.OS.licenseKeyImg.url }}">
+              <img src="{{ workstation.OS.licenseKeyImg.url }}"></a>
+          {% elif workstation.OS.licenseKeyText %}
+            <h5 class="card-title">{{ workstation.Employee.departament }}</h5>
+          {% else %}
+            <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable"></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Название производителя:
+          </h5>
+          </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.manufacturer }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Название модели:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.modelComputer }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Инвентарный номер:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          {% if workstation.serialImg %}
+            <a href="{{ workstation.serialImg.url }}">
+              <img src="{{ workstation.serialImg.url }}"></a>
+          {% elif workstation.serial %}
+            <h5 class="card-title">{{ workstation.serial }}</h5>
+          {% else %}
+            <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable"></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/motherboard.svg' %}" class="iconTitle">
+            Материнская плата:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">
+            <a class="noDecoration" href="#motherboard">{{ workstation.motherboard }}</a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/display.svg' %}" class="iconTitle">
+            Монитор:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">
+            <a class="noDecoration" href="#monitor">{{ workstation.monitor }}</a>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/cpu-fill.svg' %}" class="iconTitle">
+            CPU:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.CPU }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/gpu-card.svg' %}" class="iconTitle">
+            GPU:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.GPU }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/memory.svg' %}" class="iconTitle">
+            Оперативная память:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.RAM }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+            <h5 class="card-title">
+              <img src="{% static 'images/device-ssd-fill.svg' %}" class="iconTitle">
+              Накопитель SSD:
+            </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.SSD }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/device-hdd-fill.svg' %}" class="iconTitle">
+            Накопитель HDD:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.HDD }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/plug.svg' %}" class="iconTitle">
+            Блок питания:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.DCPower }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+    <div class="col">
+      <div class="card border-dark h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/keyboard.svg' %}" class="iconTitle">
+            Клавиатура:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.keyBoard }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/mouse2.svg' %}" class="iconTitle">
+            Мышь:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.mouse }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-header mt-3 text-center">
+    <a name="monitor"></a> 
+    <h1 class="card-title">
+      <img src="{% static 'images/display.svg' %}" class="iconHeader">
+      Монитор
+    </h1>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Производитель:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.monitor.manufacturer }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Модель:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.monitor.name }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Серийный номер:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">
+            {% if workstation.monitor.serialImg %}
+              <a href="{{ workstation.monitor.serialImg.url }}">
+                <img src="{{ workstation.monitor.serialImg.url }}">
+              </a>
+            {% elif workstation.monitor.serial %}
+              <h5 class="card-title">{{ workstation.monitor.serial }}</h5>
+            {% else %}
+                <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable">
+            {% endif %}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100 ">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Инвентарный номер:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          {% if workstation.monitor.inventImg %}
+          <a href="{{ workstation.monitor.inventImg.url }}">
+            <img src="{{ workstation.monitor.inventImg.url }}">
           </a>
-        {% elif workstation.OS.licenseKeyText %}
-          {{ workstation.OS.licenseKeyText }}
-        {% else %}
-          
-        {% endif %}
-      </p>
+          {% elif workstation.monitor.invent %}
+            <h5 class="card-title">{{ workstation.monitor.invent }}</h5>
+          {% else %}
+            <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable"></a>
+          {% endif %}  
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Название производителя: </br> {{ workstation.manufacturer }}</p>
+  <div class="card-header mt-3 text-center">
+    <a name="motherboard"></a>
+    <h1 class="card-title">
+      <img src="{% static 'images/motherboard.svg' %}" class="iconHeader">     
+      Материнская плата
+    </h1>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Производитель:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.manufacturer }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p>Название модели: </br> {{ workstation.modelComputer }}</p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Модель:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.name }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p>Инвентарный номер:</br> 
-        {% if workstation.serialImg %}
-        <a href="{{ workstation.serialImg.url }}">
-          <img src="{{ workstation.serialImg.url }}">
-        </a>
-        {% elif workstation.serial %}
-          {{ workstation.serial }}
-        {% else %}
-        
-        {% endif %}
-      </p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/list-columns.svg' %}" class="iconTitle">
+            Серийный номер:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          {% if workstation.motherboard.serialImg %}
+            <a href="{{ workstation.motherboard.serialImg.url }}">
+              <img src="{{ workstation.motherboard.serialImg.url }}"></a>
+          {% elif workstation.motherboard.serial %}
+            <h5 class="card-title">{{ workstation.motherboard.serial }}</h5>
+          {% else %}
+            <img src="{% static 'images/file-earmark-x.svg' %}" class="iconTable"></a>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Материнская плата: </br> <a class="noDecoration" href="#motherboard">{{ workstation.motherboard }}</a></p>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/cpu-fill.svg' %}" class="iconTitle">
+            Сокет:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.CPUSoket }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p>Монитор: </br> <a class="noDecoration" href="#monitor">{{ workstation.monitor }}</a></p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/plug.svg' %}" class="iconTitle">
+            Питание CPU:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.powerSupplyCPU }}</h5>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>CPU: </br> {{ workstation.CPU }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>GPU: </br> {{ workstation.GPU }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Оперативная память: </br> {{ workstation.RAM }}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Накопитель SSD: </br> {{ workstation.SSD }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Накопитель HDD: </br> {{ workstation.HDD }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Блок питания: </br> {{ workstation.DCPower }}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Клавиатура: </br> {{ workstation.keyBoard }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Мышь: </br> {{ workstation.mouse }}</p>
-    </div>
-  </div>
-  <div class="row">
-    <h1><a name="monitor"></a>Монитор</h1>
-    <div class="col-sm-3">
-      <p>Производитель: </br> {{ workstation.monitor.manufacturer }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Модель: </br> {{ workstation.monitor.name }}</p>
-    </div> 
-    <div class="col-sm-3">
-      <p>Серийный номер: </br>
-        {% if workstation.monitor.serialImg %}
-        <a href="{{ workstation.monitor.serialImg.url }}">
-          <img src="{{ workstation.monitor.serialImg.url }}">
-        </a>
-        {% elif workstation.monitor.serial %}
-          {{ workstation.monitor.serial }}
-        {% else %}
-        
-        {% endif %}
-      </p>
-    </div>
-    <div class="col-sm-3">
-      <p>Инвентарный номер: </br>
-        {% if workstation.monitor.inventImg %}
-        <a href="{{ workstation.monitor.inventImg.url }}">
-          <img src="{{ workstation.monitor.inventImg.url }}">
-        </a>
-        {% elif workstation.monitor.invent %}
-          {{ workstation.monitor.invent }}
-        {% else %}
-        
-        {% endif %}
-      </p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/plug.svg' %}" class="iconTitle">
+            Питание материнской платы:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.powerSupply }}</h5>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <h1><a name="motherboard"></a>Материнская плата</h1>
-    <div class="col-sm-3">
-      <p>Производитель: </br> {{ workstation.motherboard.manufacturer }}</p>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/memory.svg' %}" class="iconTitle">
+            Слоты оперативной памяти:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.RAMSlot }}</h5>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p>Модель: </br> {{ workstation.motherboard.name }}</p>
-    </div> 
-    <div class="col-sm-3">
-      <p>Серийный номер: </br>
-        {% if workstation.motherboard.serialImg %}
-        <a href="{{ workstation.motherboard.serialImg.url }}">
-          <img src="{{ workstation.motherboard.serialImg.url }}">
-        </a>
-        {% elif workstation.motherboard.serial %}
-          {{ workstation.motherboard.serial }}
-        {% else %}
-        
-        {% endif %}
-      </p>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/pci-card.svg' %}" class="iconTitle">
+            PCI Expres:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.PCI_E }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/pci-card.svg' %}" class="iconTitle">
+            PCI:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.PCI }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/plug.svg' %}" class="iconTitle">
+            VGA:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.VGA }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/hdmi.svg' %}" class="iconTitle">
+            HDMI:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.HDMI }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/displayport.svg' %}" class="iconTitle">
+            DispayPort:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.DispayPort }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-2 mt-3">
+    <div class="col">
+      <div class="card border-dark  h-100">
+        <div class="card-header">
+          <h5 class="card-title">
+            <img src="{% static 'images/usb.svg' %}" class="iconTitle">
+            USB:
+          </h5>
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{ workstation.motherboard.USBPort }}</h5>
+        </div>
+      </div>
     </div>  
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Сокет: </br> {{ workstation.motherboard.CPUSoket }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>Питание CPU: </br> {{ workstation.motherboard.powerSupplyCPU }}</p>
-    </div> 
-    <div class="col-sm-3">
-      <p>Питание материнской платы: </br> {{ workstation.motherboard.powerSupply }}</p>
-    </div>  
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Слоты оперативной памяти: </br> {{ workstation.motherboard.RAMSlot }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>PCI Expres: </br> {{ workstation.motherboard.PCI_E }}</p>
-    </div> 
-    <div class="col-sm-3">
-      <p>PCI: </br> {{ workstation.motherboard.PCI }}</p>
-    </div>  
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>VGA: </br> {{ workstation.motherboard.VGA }}</p>
-    </div>
-    <div class="col-sm-3">
-      <p>HDMI: </br> {{ workstation.motherboard.HDMI }}</p>
-    </div> 
-    <div class="col-sm-3">
-      <p>DispayPort: </br> {{ workstation.motherboard.DispayPort }}</p>
-    </div>  
-  </div>
-
 </div>
-
-</div>  
-
 {% endblock %}
 
 

@@ -17,7 +17,7 @@
   <div class="container-fluid">
     <div class="row vert">
       <div class="col-sm-2">
-      <nav class="navbar navmenu h-100  flex-column navbar-dark bg-dark">
+      <nav class="navbar sticky-top navmenu h-100  flex-column navbar-dark bg-dark">
         <ul class="nav-pills w-100" >
           {% if user.is_authenticated %}
           <div class="card bg-dark mb-3" >
@@ -50,7 +50,40 @@
             <a  class="nav-link {% if request.resolver_match.view_name == 'workstation' %}active{% endif %}"
             href="{% url 'workstation' %}">Раб. станция</a>
           </li> 
+          <li class="nav-item">
+            <a  class="nav-link {% if request.resolver_match.view_name == '#systemInfo' %}active{% endif %}"
+            href="#systemInfo">Информация о системе</a>
+          </li> 
+          <li class="nav-item">
+            <a  class="nav-link {% if request.resolver_match.view_name == 'pk#infoEmployee' %}active{% endif %}"
+            href="#infoEmployee">Информация о сотруднике</a>
+          </li> 
+          <li class="nav-item">
+            <a  class="nav-link {% if request.resolver_match.view_name == '#configuration' %}active{% endif %}"
+            href="#configuration">Конфигурация системы</a>
+          </li> 
+          <li class="nav-item">
+            <a  class="nav-link {% if request.resolver_match.view_name == '#monitor' %}active{% endif %}"
+            href="#monitor">Монитор</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link {% if request.resolver_match.view_name == '#motherboard' %}active{% endif %}"
+            href="#motherboard">Материнская плата</a>
+          </li>
+         
+            <a  class="nav-link {% if request.resolver_match.view_name == '#systemInfo' %}active{% endif %}"
+            href="#systemInfo">
+            <div class="maxheight">
+              
+            </div>  
+            </a>
+
         </ul>
+        <nav class="navbar sticky-bottom navbar-secondary bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Наверх</a>
+          </div>
+        </nav>
       </nav>
       </div>
     <div class="col-sm-10 ">

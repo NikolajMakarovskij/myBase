@@ -29,11 +29,11 @@ def index(request):
 
 class EmployeeListView(generic.ListView):
     model = Employee
-    paginate_by =  20
+    paginate_by =  10
 
 class WorkplaceListView(generic.ListView):
     model = Workplace
-    paginate_by =  1
+    paginate_by =  10
 
 def workplace_list(request): 
     return render(
@@ -46,7 +46,7 @@ def workplace_list(request):
 
 class workstationListView(generic.ListView):
     model = workstation
-    paginate_by =  20
+    paginate_by =  10
 
 def workstation_list(request): 
     return render(
@@ -74,7 +74,7 @@ def workstation_detail_view(request,pk):
 
 class softwareListView(generic.ListView):
     model = software
-    paginate_by =  20
+    paginate_by =  10
 
 def software_list(request):
     return render(

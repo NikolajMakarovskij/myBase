@@ -1,69 +1,71 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <div class="col-sm-12"> 
-    <h1 style="text-align:center" >Список сотрудников</h1>
-
+<div class="col-sm-12 table-responsive-xxl"> 
+    <caption>
+      <h1 style="text-align:center" >Список сотрудников</h1>
+    </caption>
+    
     {% if employee_list %}
-    <table class="table_list">
-        <th class="table_head">ФИО</th>
-        <th class="table_head">Раб. место</th>
-        <th class="table_head">Должность</th>
-        <th class="table_head">Отдел</th>
-        <th class="table_head">Кабинет</th>
-        <th class="table_head">Этаж</th>
-        <th class="table_head">Здание</th>
-
-    {% for Employee in employee_list %}
-    <tbody class="table_tbody">
-    <tr>
-    <td class="table_column_list">
-        {{ Employee.name }} 
-    </td>
-    <td class="table_column_list">
-        {{ Employee.Workplace.name }} 
-    </td>
-    <td class="table_column_list">
-        {{ Employee.post.name }} 
-    </td>
-    <td class="table_column_list">
-        {{ Employee.departament.name }} 
-    </td>
-    <td class="table_column_list">
-        {{ Employee.Workplace.Room.name }} 
-    </td>
-    <td class="table_column_list">
-        {{ Employee.Workplace.Room.Floor.name }} 
-    </td>
-    <td class="table_column_list">
-        {{ Employee.Workplace.Room.Floor.Building.name }}
-    </td>
-
-    {% endfor %}
-    </tr>
+    <table class="table align-middle table-hover" style="text-align:center">
+      <thead>
+        <tr>
+          <th scope="col">ФИО</th>
+          <th scope="col">Раб. место</th>
+          <th scope="col">Должность</th>
+          <th scope="col">Отдел</th>
+          <th scope="col">Кабинет</th>
+          <th scope="col">Этаж</th>
+          <th scope="col">Здание</th>
+        </tr>
+      </thead>
+    <tbody style="text-align:center">
+      {% for Employee in employee_list %}
+      <tr>
+        <td>{{ Employee.name }}</td>
+        <td>{{ Employee.Workplace.name }}</td>
+        <td>{{ Employee.post.name }}</td>
+        <td>{{ Employee.departament.name }}</td>
+        <td>{{ Employee.Workplace.Room.name }}</td>
+        <td>{{ Employee.Workplace.Room.Floor.name }}</td>
+        <td>{{ Employee.Workplace.Room.Floor.Building.name }}</td>
+      </tr>
+      {% endfor %}
     </tbody>
-    </table>
-
+  </table>
     {% else %}
-      <p>Нет зданий.</p>
+      <p>В базе данных сотрудники не найдены.</p>
     {% endif %}
   </div>
-  {% block pagination %}
-  {% if is_paginated %}
-      <div class="pagination">
-          <span class="page-links">
-              {% if page_obj.has_previous %}
-                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
-              {% endif %}
-              <span class="page-current">
-                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-              </span>
-              {% if page_obj.has_next %}
-                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
-              {% endif %}
-          </span>
+    <div class="mtop">
+        {% block pagination %}
+        {% if is_paginated %}
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        {% if page_obj.has_previous %}
+                        <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                        {% endif %}
+                    </li>
+                    {% for p in page_obj.paginator.page_range %}
+                    {% if p == page_obj.number %}
+                    <li class="page-item active" aria-current="page" style="background-color: black;">
+                        <a class="page-link" href="{{ request.path }}?page={{ p }}">{{ p }}</a>
+                    </li>
+                    {% else %}
+                      <li class="page-item" >
+                        <a class="page-link" href="{{ request.path }}?page={{ p }}">{{ p }}</a>
+                      </li>
+                    {% endif %}
+                    {% endfor %}
+                    <li class="page-item">
+                        {% if page_obj.has_next %}
+                        <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+                        {% endif %}
+                    </li>
+                </ul>
+        {% endif %}
+      {% endblock %}  
       </div>
-  {% endif %}
-{% endblock %}   
 {% endblock %}
  

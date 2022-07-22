@@ -6,51 +6,70 @@
   <div class="row">
     <div class="col-sm-1">
     </div>
-    <div class="col-sm-3">
-      <a class="button_link" href="{% url 'workplace' %}">
-        <div class="square" > 
-          <div class="text">Рабочие места</div>
-        </div> 
-      </a>
-    </div>
-    <div class="col-sm-3">
-      <a class="button_link" href="{% url 'workstation' %}">
-        <div class="square"> 
-          <div class="text">Рабочие станции</div>
+    <div class="col-sm-3 nodecorationIndex">
+      <a href="{% url 'workplace' %}">
+        <div class="card text-white text-center bg-dark square justify-content-center">
+          <div class="card-header">
+            <h5 class="card-title">Рабочие места</h5>
+          </div>
+          <img src="{% static 'images/pencil-square.svg' %}" class="card-img-top iconIndex">
         </div>
       </a>
     </div>
-    <div class="col-sm-3">
-      <a class="button_link" href="#">
-        <div class="square">
-          <div class="text">Склад</div>
+    <div class="col-sm-3 nodecorationIndex">
+      <a href="{% url 'workstation' %}">
+        <div class="card text-white text-center bg-dark square justify-content-center">
+          <div class="card-header">
+            <h5 class="card-title">Рабочие станции</h5>
+          </div>
+          <img src="{% static 'images/pc-display.svg' %}" class="card-img-top iconIndex">
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3 nodecorationIndex">
+      <a href="#">
+        <div class="card text-white text-center bg-dark square justify-content-center">
+          <div class="card-header">
+            <h5 class="card-title">Склад</h5>
+          </div>
+          <img src="{% static 'images/boxes.svg' %}" class="card-img-top iconIndex">
         </div>
       </a>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-sm-3">
-      <a class="button_link" href="{% url 'software' %}">
-        <div class="square">
-          <div class="text">Софт</div>
-        </div>
-      </a>   
-    </div>
-    <div class="col-sm-3">
-      <a class="button_link" href="#">
-        <div class="square">
-          <div class="text">ЭЦП</div>
-        </div>
-      </a>    
-    </div>
-    <div class="col-sm-3">
-      <a class="button_link" href="{% url 'employee' %}">
-        <div class="square">
-          <div class="text">Сотрудники</div>
+    <div class="col-sm-3 nodecorationIndex">
+      <a href="{% url 'software' %}">
+        <div class="card text-white text-center bg-dark square justify-content-center">
+          <div class="card-header">
+            <h5 class="card-title">Софт</h5>
+          </div>
+          <img src="{% static 'images/disc.svg' %}" class="card-img-top iconIndex">
         </div>
       </a>
     </div>
+    <div class="col-sm-3 nodecorationIndex">
+      <a href="#">
+        <div class="card text-white text-center bg-dark square justify-content-center">
+          <div class="card-header">
+            <h5 class="card-title">ЭЦП</h5>
+          </div>
+          <img src="{% static 'images/file-earmark-binary.svg' %}" class="card-img-top iconIndex">
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3 nodecorationIndex">
+      <a href="{% url 'employee' %}">
+        <div class="card text-white text-center bg-dark square justify-content-center">
+          <div class="card-header">
+            <h5 class="card-title">Сотрудники</h5>
+          </div>
+          <img src="{% static 'images/people.svg' %}" class="card-img-top iconIndex">
+        </div>
+      </a>
+    </div>
+    
   </div>
-
+  
 {% endblock %}
